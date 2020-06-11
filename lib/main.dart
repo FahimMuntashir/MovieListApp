@@ -53,9 +53,43 @@ class MovieListView extends StatelessWidget {
                 child: Text('F'),
               ),
             ),
+            trailing: Text('...'),
+            onTap: (){
+              debugPrint('Movies Name : ${movies.elementAt(index)}');
+              Navigator.push(context, MaterialPageRoute(builder: (context){
+                return MovieDetails();
+              }));
+            },
           ),
         );
       }),
+    );
+  }
+}
+
+
+class MovieDetails extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'New Routes'
+        ),
+
+      ),
+      backgroundColor: Colors.blueGrey,
+      body: Container(
+        child: Center(
+          child: RaisedButton(
+            child: Text('Go Back'),
+              onPressed: (){
+              Navigator.pop(context);
+
+
+          }),
+        ),
+      ),
     );
   }
 }
