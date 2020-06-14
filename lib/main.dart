@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'movie.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,6 +14,9 @@ class MyApp extends StatelessWidget {
 
 
 class MovieListView extends StatelessWidget {
+
+  final List<Movie> movieList = Movie.getMovies();
+
  final List movies = [
     'The GodFather',
    'Citizen Cane',
@@ -35,15 +39,15 @@ class MovieListView extends StatelessWidget {
       ),
       backgroundColor: Colors.blueGrey.shade600,
       body: ListView.builder(
-        itemCount: movies.length,
+        itemCount: movieList.length,
           itemBuilder: (BuildContext context, int index){
         return Card(
           elevation: 5.0,
 
           color: Colors.white,
           child: ListTile(
-            title: Text(movies[index]),
-            subtitle: Text('sub'),
+            title: Text(movieList[index].title),
+            subtitle: Text("${movieList.elementAt(0).title}"),
             leading: CircleAvatar(
               child: Container(
                 decoration: BoxDecoration(
@@ -55,9 +59,9 @@ class MovieListView extends StatelessWidget {
             ),
             trailing: Text('...'),
             onTap: (){
-              debugPrint('Movies Name : ${movies.elementAt(index)}');
+              debugPrint('Movies Name : ${movieList.elementAt(index).title}');
               Navigator.push(context, MaterialPageRoute(builder: (context){
-                return MovieDetails(movieName: movies.elementAt(index),);
+                return MovieDetails(movieName: movieList.elementAt(index).title,);
               }));
             },
           ),
