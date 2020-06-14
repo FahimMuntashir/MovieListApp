@@ -57,7 +57,7 @@ class MovieListView extends StatelessWidget {
             onTap: (){
               debugPrint('Movies Name : ${movies.elementAt(index)}');
               Navigator.push(context, MaterialPageRoute(builder: (context){
-                return MovieDetails();
+                return MovieDetails(movieName: movies.elementAt(index),);
               }));
             },
           ),
@@ -69,6 +69,11 @@ class MovieListView extends StatelessWidget {
 
 
 class MovieDetails extends StatelessWidget {
+
+  final String movieName;
+
+  const MovieDetails({Key key, this.movieName}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +87,7 @@ class MovieDetails extends StatelessWidget {
       body: Container(
         child: Center(
           child: RaisedButton(
-            child: Text('Go Back'),
+            child: Text('Go Back ${this.movieName}'),
               onPressed: (){
               Navigator.pop(context);
 
