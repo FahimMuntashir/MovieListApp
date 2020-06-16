@@ -34,9 +34,9 @@ class MovieListView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Movies'),
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.blueGrey,
       ),
-      backgroundColor: Colors.blueGrey.shade600,
+      backgroundColor: Colors.blueGrey.shade900,
       body: ListView.builder(
           itemCount: movieList.length,
           itemBuilder: (BuildContext context, int index) {
@@ -119,8 +119,12 @@ class MovieListView extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        Text("Released: ${movie.released}",style: mainTextStyle()),
-                        Text("Year: ${movie.year}",style: mainTextStyle(),),
+                        Text("Released: ${movie.released}",
+                            style: mainTextStyle()),
+                        Text(
+                          "Year: ${movie.year}",
+                          style: mainTextStyle(),
+                        ),
 //                    Text("Genre: ${movie.genre}"),
                       ],
                     ),
@@ -144,7 +148,7 @@ class MovieListView extends StatelessWidget {
         });
   }
 
-  TextStyle mainTextStyle(){
+  TextStyle mainTextStyle() {
     return TextStyle(
       color: Colors.grey,
       fontSize: 15.0,
@@ -176,18 +180,46 @@ class MovieDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New Routes'),
+        title: Text('Details'),
       ),
       backgroundColor: Colors.blueGrey,
-      body: Container(
-        child: Center(
-          child: RaisedButton(
-              child: Text('Go Back ${this.movie.title}'),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
-        ),
+      body: ListView(
+        children: <Widget>[
+          MovieDetailsThums(thumbnail: movie.images[0]),
+        ],
       ),
+    );
+  }
+}
+
+class MovieDetailsThums extends StatelessWidget {
+  final String thumbnail;
+
+  const MovieDetailsThums({Key key, this.thumbnail}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: <Widget>[
+        Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            Container(
+              height: 190.0,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                image: NetworkImage(thumbnail),
+                fit: BoxFit.cover,
+              )),
+            ),
+            Icon(
+              Icons.play_circle_outline,
+              color: Colors.white,
+            )
+          ],
+        )
+      ],
     );
   }
 }
