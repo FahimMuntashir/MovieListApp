@@ -43,8 +43,7 @@ class MovieListView extends StatelessWidget {
             return Stack(children: <Widget>[
               movieCard(movieList[index], context),
               Positioned(
-                top: 10,
-                  child: movieImage(movieList[index].images[0])),
+                  top: 10, child: movieImage(movieList[index].images[0])),
             ]);
 
 //        return Card(
@@ -94,26 +93,39 @@ class MovieListView extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(
                   top: 8.0, bottom: 8.0, left: 40.0, right: 20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(movie.title),
-                      Text("Country: ${movie.country}"),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Text("Released: ${movie.released}"),
-                      Text("Year: ${movie.year}"),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          movie.title,
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          "Country: ${movie.country}",
+                          style: mainTextStyle(),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Text("Released: ${movie.released}",style: mainTextStyle()),
+                        Text("Year: ${movie.year}",style: mainTextStyle(),),
 //                    Text("Genre: ${movie.genre}"),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -130,6 +142,13 @@ class MovieListView extends StatelessWidget {
             }),
           );
         });
+  }
+
+  TextStyle mainTextStyle(){
+    return TextStyle(
+      color: Colors.grey,
+      fontSize: 15.0,
+    );
   }
 
   Widget movieImage(String imageUrl) {
