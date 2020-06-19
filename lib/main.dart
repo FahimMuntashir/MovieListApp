@@ -182,15 +182,21 @@ class MovieDetails extends StatelessWidget {
       appBar: AppBar(
         title: Text('Details'),
       ),
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.grey,
       body: ListView(
         children: <Widget>[
           MovieDetailsThums(thumbnail: movie.images[0]),
+          MoviePoster(poster: movie.images[1]),
+          SizedBox(height: 30.0,),
+          MovieActor(actors: movie.actors,),
+
         ],
       ),
     );
   }
 }
+
+
 
 class MovieDetailsThums extends StatelessWidget {
   final String thumbnail;
@@ -216,10 +222,93 @@ class MovieDetailsThums extends StatelessWidget {
             Icon(
               Icons.play_circle_outline,
               color: Colors.white,
+              size: 100.0,
             )
           ],
+        ),
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [Color(0x00f5f5f5), Color(0xfff5f5f5)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter),
+
+
+          ),
+          height: 60.0,
         )
       ],
+    );
+  }
+}
+
+
+class MovieDetailsPoster extends StatelessWidget {
+  final Movie movie;
+
+  const MovieDetailsPoster({Key key, this.movie}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+         mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          MoviePoster(poster: movie.images[0].toString()),
+          SizedBox(
+            height: 50.0,
+          ),
+          MovieActor(actors: movie.actors,),
+
+        ],
+      ),
+    );
+  }
+}
+
+class MovieActor extends StatelessWidget {
+  final String actors;
+
+  const MovieActor({Key key, this.actors}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(actors,style: TextStyle(
+          color: Colors.redAccent,
+//        fontSize: 20.0,
+        ),),
+      ),
+    );
+  }
+}
+
+
+
+
+
+
+class MoviePoster extends StatelessWidget {
+  final String poster;
+
+  const MoviePoster({Key key, this.poster}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    var borderRadius= BorderRadius.all(Radius.circular(10.0));
+    return ClipRRect(
+      borderRadius: borderRadius,
+      child: Container(
+
+        width: 100,
+        height: 160,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(poster),
+//            fit: BoxFit.cover,
+          ),
+        ),
+      ),
     );
   }
 }
