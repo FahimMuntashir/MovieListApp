@@ -186,6 +186,7 @@ class MovieDetails extends StatelessWidget {
       body: ListView(
         children: <Widget>[
           MovieDetailsThums(thumbnail: movie.images[0]),
+          Line(),
           MoviePoster(poster: movie.images[1]),
           SizedBox(height: 30.0,),
           MovieActor(actors: movie.actors,),
@@ -308,6 +309,19 @@ class MoviePoster extends StatelessWidget {
 //            fit: BoxFit.cover,
           ),
         ),
+      ),
+    );
+  }
+}
+
+class Line extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+      child: Container(
+        height: 10.0,
+color: Colors.black,
       ),
     );
   }
