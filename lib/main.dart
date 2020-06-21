@@ -190,6 +190,7 @@ class MovieDetails extends StatelessWidget {
           MoviePoster(poster: movie.images[1]),
           SizedBox(height: 30.0,),
           MovieActor(actors: movie.actors,),
+          MovieExtraPosters(poster: movie.images,)
 
         ],
       ),
@@ -322,6 +323,50 @@ class Line extends StatelessWidget {
       child: Container(
         height: 10.0,
 color: Colors.black,
+      ),
+    );
+  }
+}
+
+
+class MovieExtraPosters extends StatelessWidget {
+  final List<String>poster;
+
+  const MovieExtraPosters({Key key, this.poster}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text('More movies poster.t'.toUpperCase(), style: TextStyle(
+            fontSize: 14.0,
+            color: Colors.black87,
+
+          ),),
+          Container(
+            height: 200,
+            child: ListView.separated(
+                itemBuilder: (context,index)=>ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width / 4,
+                    height: 160,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(poster[index]),
+                        fit: BoxFit.cover
+                      )
+                    ),
+                  ),
+                ),
+              scrollDirection: Axis.horizontal,
+                separatorBuilder: (context, index)=>SizedBox(width: 10,),
+                itemCount: poster.length),
+
+          ),
+        ],
       ),
     );
   }
