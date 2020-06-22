@@ -13,8 +13,9 @@ class MovieDetails extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Details'),
+        backgroundColor: Colors.blueGrey,
       ),
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.blueGrey.shade600,
       body: ListView(
         children: <Widget>[
           MovieDetailsThums(thumbnail: movie.images[0]),
@@ -108,11 +109,13 @@ class MovieActor extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(actors,style: TextStyle(
-          color: Colors.redAccent,
-//        fontSize: 20.0,
-        ),),
+        padding: const EdgeInsets.all(20.0),
+        child: Center(
+          child: Text("Actor : $actors",style: TextStyle(
+            color: Colors.grey,
+        fontSize: 20.0,
+          ),),
+        ),
       ),
     );
   }
@@ -172,11 +175,16 @@ class MovieExtraPosters extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('More movies poster.t'.toUpperCase(), style: TextStyle(
-            fontSize: 14.0,
-            color: Colors.black87,
+          Center(
+            child: Text('More movies poster'.toUpperCase(), style: TextStyle(
+              fontSize: 14.0,
+              color: Colors.black87,
 
-          ),),
+            ),),
+          ),
+          SizedBox(
+            height: 20.0,
+          ),
           Container(
             height: 200,
             child: ListView.separated(
